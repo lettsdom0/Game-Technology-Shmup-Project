@@ -1,0 +1,295 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://shmup_graphics/GalaxyBackgroundSprite.png" type="Texture" id=2]
+[ext_resource path="res://Laser.gd" type="Script" id=3]
+[ext_resource path="res://shmup_graphics/LaserSprite.png" type="Texture" id=4]
+[ext_resource path="res://Missle.gd" type="Script" id=5]
+[ext_resource path="res://shmup_graphics/MissileSprite.png" type="Texture" id=6]
+[ext_resource path="res://Player.gd" type="Script" id=7]
+[ext_resource path="res://shmup_graphics/PlayerSprite.png" type="Texture" id=8]
+[ext_resource path="res://Enemy.gd" type="Script" id=9]
+[ext_resource path="res://shmup_graphics/EnemySprite.png" type="Texture" id=10]
+[ext_resource path="res://BossEnemy.gd" type="Script" id=11]
+[ext_resource path="res://Score.gd" type="Script" id=12]
+[ext_resource path="res://shmup_graphics/GameOverSprite.png" type="Texture" id=13]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 1.12294, 2.62772 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 5.97884, 32.9137 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 14.3917, 20.3853 )
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8.2079, 4.83747 )
+
+[node name="Main" type="Node"]
+
+script = ExtResource( 1 )
+
+[node name="GalaxyBackgroundSprite" type="Sprite" parent="."]
+
+position = Vector2( 240.51, 453.014 )
+scale = Vector2( 1.00037, 0.696755 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Projectile" type="Area2D" parent="."]
+
+position = Vector2( -61.0159, 558.247 )
+rotation = 3.13625
+scale = Vector2( 0.0907554, 0.401345 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 2
+collision_mask = 4
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 3 )
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="LaserSprite" type="Sprite" parent="Projectile"]
+
+position = Vector2( 3.45013, 1.22485 )
+rotation = 3.02252e-10
+scale = Vector2( 12.3251, 2.77731 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform", "Z" ]
+
+[node name="Laser Hitbox" type="CollisionShape2D" parent="Projectile"]
+
+position = Vector2( 2.29193, -2.67456 )
+rotation = -2.13384e-09
+scale = Vector2( 19.204, 9.20889 )
+shape = SubResource( 1 )
+
+[node name="Missile" type="Area2D" parent="."]
+
+position = Vector2( -88.3804, 566.384 )
+rotation = 3.14159
+scale = Vector2( 0.0907554, 0.343392 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 2
+collision_mask = 4
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 5 )
+_sections_unfolded = [ "Collision", "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MissileSprite" type="Sprite" parent="Missile"]
+
+rotation = 3.14159
+scale = Vector2( 5.60734, 1.44899 )
+texture = ExtResource( 6 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Missile Hitbox" type="CollisionShape2D" parent="Missile"]
+
+rotation = -3.14159
+scale = Vector2( 5.60734, 1.44899 )
+shape = SubResource( 2 )
+
+[node name="Player" type="Area2D" parent="."]
+
+position = Vector2( 231.917, 684.258 )
+scale = Vector2( 1.62929, 1.833 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 7 )
+_sections_unfolded = [ "Collision", "Pause" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="PlayerSprite" type="Sprite" parent="Player"]
+
+position = Vector2( -0.28418, -1.0383 )
+scale = Vector2( 0.63956, 0.509029 )
+texture = ExtResource( 8 )
+
+[node name="Player Hitbox" type="CollisionShape2D" parent="Player"]
+
+position = Vector2( -0.981323, -1.4533 )
+scale = Vector2( 1.03352, 0.909927 )
+shape = SubResource( 3 )
+
+[node name="Enemy" type="Area2D" parent="."]
+
+position = Vector2( 683.335, 207.039 )
+rotation = -3.14159
+scale = Vector2( 2, 2.5 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 4
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 9 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="EnemySprite" type="Sprite" parent="Enemy"]
+
+position = Vector2( 0.0356522, -2.93083 )
+rotation = 8.55889e-10
+scale = Vector2( 0.339378, 0.218709 )
+texture = ExtResource( 10 )
+
+[node name="Enemy Hitbox" type="CollisionShape2D" parent="Enemy"]
+
+position = Vector2( -0.720783, -0.85183 )
+scale = Vector2( 1.76761, 2.20474 )
+shape = SubResource( 4 )
+
+[node name="BossEnemy" type="Area2D" parent="."]
+
+position = Vector2( -396.939, 285.621 )
+rotation = -3.14159
+scale = Vector2( 6, 7.5 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 4
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 11 )
+_sections_unfolded = [ "Collision", "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="EnemySprite" type="Sprite" parent="BossEnemy"]
+
+position = Vector2( 0.0356522, -2.93083 )
+rotation = 8.55889e-10
+scale = Vector2( 0.339378, 0.218709 )
+texture = ExtResource( 10 )
+
+[node name="Enemy Hitbox" type="CollisionShape2D" parent="BossEnemy"]
+
+position = Vector2( -0.720783, -0.85183 )
+scale = Vector2( 1.76761, 2.20474 )
+shape = SubResource( 4 )
+
+[node name="EnemyTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = true
+
+[node name="BossTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 15.0
+one_shot = false
+autostart = true
+
+[node name="ScoreLabel" type="Label" parent="."]
+
+margin_left = 2.0
+margin_right = 91.0
+margin_bottom = 31.0
+rect_scale = Vector2( 3, 3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Score: 0"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+script = ExtResource( 12 )
+_sections_unfolded = [ "Rect" ]
+
+[node name="EnemyHealth" type="Label" parent="."]
+
+margin_left = 496.0
+margin_right = 585.0
+margin_bottom = 31.0
+rect_scale = Vector2( 3, 3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Score: 0"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect" ]
+
+[node name="GameOverSprite" type="Sprite" parent="."]
+
+visible = false
+position = Vector2( 234.23, 335.103 )
+texture = ExtResource( 13 )
+
+[connection signal="area_entered" from="Projectile" to="Projectile" method="_on_Projectile_area_entered"]
+
+[connection signal="area_entered" from="Missile" to="Enemy" method="_on_Missile_area_entered"]
+
+[connection signal="area_entered" from="Missile" to="BossEnemy" method="_on_Missile_area_entered"]
+
+[connection signal="area_entered" from="Missile" to="Missile" method="_on_Missile_area_entered"]
+
+[connection signal="area_entered" from="Player" to="Player" method="_on_Player_area_entered"]
+
+[connection signal="area_entered" from="Player" to="Enemy" method="_on_PlayerCollision_area_entered"]
+
+[connection signal="area_shape_entered" from="Player" to="Enemy" method="_on_Player_area_shape_entered"]
+
+[connection signal="area_shape_entered" from="Player" to="BossEnemy" method="_on_Player_area_shape_entered"]
+
+[connection signal="area_entered" from="Enemy" to="Player" method="_on_Enemy_area_entered"]
+
+[connection signal="area_entered" from="Enemy" to="Enemy" method="_on_Enemy_area_entered"]
+
+[connection signal="area_entered" from="Enemy" to="Projectile" method="_on_Enemy_area_entered"]
+
+[connection signal="area_entered" from="BossEnemy" to="BossEnemy" method="_on_BossEnemy_area_entered"]
+
+[connection signal="area_entered" from="BossEnemy" to="Projectile" method="_on_BossEnemy_area_entered"]
+
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_EnemyTimer_timeout"]
+
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="BossTimer" to="." method="_on_BossTimer_timeout"]
+
+
